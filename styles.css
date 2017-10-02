@@ -1,0 +1,41 @@
+body {
+    width: 100%;
+}
+
+.button {
+    border: 1px solid red;
+    color: white;
+    background: red;
+    border-radius: 5px;
+    padding: 6px;
+}
+
+header {
+    height: 40px;
+}
+
+a.button {
+    width: 20%;
+    display: inline-block;
+    cursor: pointer;
+}
+
+section {
+    margin-top: 50px;
+}
+
+div#title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+a#newnote {
+    background: brown;
+    border: 1px solid brown;
+}
+
+
+label {
+    width: 10%;
+    display: inline-block;
+}
