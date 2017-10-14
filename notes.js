@@ -25,13 +25,17 @@ function showNotes() {
 // Add the compiled html to the page
     $('.content-placeholder').html(theCompiledHtml);
 
+    $( 'a.edit' ).on( 'click', function() {
+        editNote( $( this ).data('id') );
+    });
+
 }
 
 
 
 
-function editNote(){
-    $(location).attr('href','newnote.html')
+function editNote(id){
+    $(location).attr('href','newnote.html?id='+id)
     //window.location.replace("newnote.html");
     console.log( 'hallo');
     $("#title").val('Titel');
