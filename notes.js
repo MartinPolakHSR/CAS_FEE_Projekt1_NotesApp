@@ -1,9 +1,42 @@
-var titels = sessionStorage.getItem("titels");
-if( !titels )
-{
-    sessionStorage.setItem("titels", JSON.stringify([]));
-    titels = sessionStorage.getItem("titels");
-}
-titels = JSON.parse(titels);
+var savedNotes;
 
-document.getElementById("title").innerHTML = titels.length == 0 ? "none" : titels.join("</br>"); //very very simple solution!
+function showNotes() {
+
+    savedNotes = sessionStorage.getItem("notes");
+    if (!savedNotes) {
+        sessionStorage.setItem("notes", JSON.stringify([]));
+        savedNotes = sessionStorage.getItem("notes");
+    }
+    savedNotes = JSON.parse(savedNotes);
+
+
+// Grab the template script
+    var theTemplateScript = $("#notes-template").html();
+
+// Compile the template
+    var theTemplate = Handlebars.compile(theTemplateScript);
+
+// Define our data object
+    var context = savedNotes;
+
+// Pass our data to the template
+    var theCompiledHtml = theTemplate(context);
+
+// Add the compiled html to the page
+    $('.content-placeholder').html(theCompiledHtml);
+
+}
+
+
+
+
+function editNote(){
+    $(location).attr('href','newnote.html')
+    //window.location.replace("newnote.html");
+    console.log( 'hallo');
+    $("#title").val('Titel');
+    $("#description").val('Beschreibung');
+    $("#untildate").val('01.01.2017');
+};
+
+
