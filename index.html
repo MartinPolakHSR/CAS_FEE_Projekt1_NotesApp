@@ -28,10 +28,10 @@
 </header>
 
 <div id="filter">
-    <a class="button">By finish Date</a>
-    <a class="button">By created Date</a>
-    <a class="button">By Importance</a>
-    <a class="button">Show finished</a>
+    <a id="sortByFinishDate" class="button">By finish Date</a>
+    <a id="sortByCreatedDate" class="button">By created Date</a>
+    <a id="sortByImportance" class="button">By Importance</a>
+    <a id="sortByFinished" class="button">Show finished</a>
 
 </div>
 
@@ -40,37 +40,34 @@
 
     {{#each this}}
 
+    <div id="note_{{id}}" class="note view" data-id="{{id}}">
         <div class="infos">
-            <div class="toDoUntil">{{untildate}}</div>
-            <!--
+            <div id="untildate_{{id}}" class="toDoUntil">{{untildate}}</div>
+
             <input id="finished" type="checkbox">
             <label for="finished">Finished</label>
-            -->
+
         </div>
 
 
-        <div class="note">
-            <div class="title">
+        <div class="data">
+            <div id="titel_{{id}}" class="title">
                {{title}}
             </div>
 
-            <textarea rows="4" cols="50"> {{description}}</textarea>
+            <textarea id="description_{{id}}" rows="4" cols="50"> {{description}}</textarea>
         </div>
 
-        <a id="editNote_{{id}}" data-id="{{id}}"  class="button edit">edit</a>
 
+        <a id="editNote_{{id}}" data-id="{{id}}"  class="button editbutton"><span></span></a>
+
+    </div>
     {{/each}}
 </script>
 
 
 <div class="content-placeholder"></div>
 
-<script>
-    $( document ).ready(function() {
-        showNotes();
-    });
-
-</script>
 
 
 </body>

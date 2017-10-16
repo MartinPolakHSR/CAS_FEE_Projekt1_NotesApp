@@ -39,3 +39,21 @@ label {
     width: 10%;
     display: inline-block;
 }
+
+div.note.edit {
+    border: 1px solid green;
+}
+
+div.edit a.button.editbutton {
+    background: green;
+}
+
+
+
+div.edit a.button.editbutton:after {
+    content: "save";
+}
+div.view a.button.editbutton:after {
+    content: "edit";
+}
+
