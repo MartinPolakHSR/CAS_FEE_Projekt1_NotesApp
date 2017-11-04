@@ -1,6 +1,60 @@
-body {
-    width: 100%;
+
+
+div#control {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 60px 60px;
+    grid-row-gap: 5px;
+    grid-column-gap: 5px;
+    margin-bottom: 5px;
 }
+
+div.note {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 60px 60px;
+    grid-row-gap: 5px;
+    grid-column-gap: 5px;
+}
+
+div.note .untildate {
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+}
+
+div.note .titel {
+    grid-column-start: 3;
+    grid-column-end: 5;
+
+}
+
+div.note .importance {
+    grid-column-start: 5;
+    grid-column-end: 6;
+
+}
+
+div.note .finished {
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+}
+div.note .description {
+    grid-column-start: 3;
+    grid-column-end: 6;
+
+}
+
+div.note .editNote {
+    grid-column-start: 6;
+    grid-column-end: 7;
+    grid-row-start: 1;
+    grid-row-end: 3;
+
+}
+
+
 
 .button {
     border: 1px solid red;
@@ -8,26 +62,17 @@ body {
     background: red;
     border-radius: 5px;
     padding: 6px;
-}
-
-header {
-    height: 40px;
-}
-
-a.button {
-    width: 20%;
-    display: inline-block;
     cursor: pointer;
 }
 
-section {
-    margin-top: 50px;
+#control div {
+    position: relative;
 }
 
-div#title {
-    font-size: 20px;
-    font-weight: bold;
+div#control a.button {
+    line-height: 60px;
 }
+
 
 a#newNote {
     background: brown;
@@ -35,9 +80,40 @@ a#newNote {
 }
 
 
-label {
-    width: 10%;
-    display: inline-block;
+
+#styleswitcher select{
+    line-height: 60px;
+    position: absolute;
+    top: 30px;
+    height: 32px;
+    margin-top: -16px;
+    right: 0px;
+}
+
+
+
+div#sortByFinished a {
+    position: absolute;
+    line-height: 20px !important;
+    right: 0;
+    top: 50%;
+    margin-top: -16px;
+}
+
+
+div.note div {
+    display: flex;
+    align-items: center;
+}
+
+
+div.editNote {
+    position: relative;
+}
+
+a.button.editbutton {
+    position: absolute;
+    right: 0;
 }
 
 div.note.edit {
@@ -56,4 +132,3 @@ div.edit a.button.editbutton:after {
 div.view a.button.editbutton:after {
     content: "edit";
 }
-

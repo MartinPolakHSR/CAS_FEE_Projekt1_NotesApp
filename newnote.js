@@ -22,6 +22,7 @@ function createNewNote(){
     newNote.title = $("#title").val();
     newNote.description = $("#description").val();
     newNote.untildate = $("#untildate").val();
+    newNote.finished = false;
 
 
     if(sessionStorage.notes)

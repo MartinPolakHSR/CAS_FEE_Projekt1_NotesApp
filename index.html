@@ -19,20 +19,26 @@
 
 <body>
 
-<header>
-    <a id="newNote" href="newnote.html" class="button">Create new Note</a>
-    <select id="styleswitcher" class="button">
-        <option>Style 1</option>
-        <option>Style 2</option>
-    </select>
-</header>
+<div id="control">
+    <div id="newNote">
+        <a  href="newnote.html" class="button">Create new Note</a>
+    </div>
+    <div id="styleswitcher">
+        <select  class="button">
+            <option>Style 1</option>
+            <option>Style 2</option>
+        </select>
+    </div>
 
-<div id="filter">
-    <a id="sortByFinishDate" class="button">By finish Date</a>
-    <a id="sortByCreatedDate" class="button">By created Date</a>
-    <a id="sortByImportance" class="button">By Importance</a>
-    <a id="sortByFinished" class="button">Show finished</a>
 
+    <div id="filter">
+        <a id="sortByFinishDate" class="button">By finish Date</a>
+        <a id="sortByCreatedDate" class="button">By created Date</a>
+        <a id="sortByImportance" class="button">By Importance</a>
+    </div>
+    <div id="sortByFinished">
+        <a  class="button">Show finished</a>
+    </div>
 </div>
 
 
@@ -41,25 +47,38 @@
     {{#each this}}
 
     <div id="note_{{id}}" class="note view" data-id="{{id}}">
-        <div class="infos">
-            <div id="untildate_{{id}}" class="toDoUntil">{{untildate}}</div>
 
-            <input id="finished" type="checkbox">
-            <label for="finished">Finished</label>
 
+
+        <div class="untildate">
+            <input class="onlyedit" type="date">
+            <span>{{untildate}}</span>
+        </div>
+
+        <div class="titel">
+            <input class="onlyedit" type="text">
+            <span> {{title}}</span>
         </div>
 
 
-        <div class="data">
-            <div id="titel_{{id}}" class="title">
-               {{title}}
-            </div>
-
-            <textarea id="description_{{id}}" rows="4" cols="50"> {{description}}</textarea>
+        <div class="importance">
+            <div>Importance</div>
         </div>
 
+        <div  class="editNote"  >
+            <a class="button editbutton" data-id="{{id}}"><span></span></a>
+            <span></span>
+        </div>
 
-        <a id="editNote_{{id}}" data-id="{{id}}"  class="button editbutton"><span></span></a>
+        <div id="finished">
+            <input id="finishedcheck" class="finishedcheck" data-id="{{id}}" type="checkbox" {{#if finished}}checked{{/if}} />
+            <label for="finishedcheck">Finished</label>
+        </div>
+
+        <div class="description">
+            <textarea  rows="4" cols="50" readonly="true">{{description}}</textarea>
+        </div>
+
 
     </div>
     {{/each}}
