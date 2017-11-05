@@ -117,11 +117,11 @@ a.button.editbutton {
 }
 
 div.note.edit {
-    border: 1px solid green;
+    border: 1px solid red;
 }
 
 div.edit a.button.editbutton {
-    background: green;
+    background: red;
 }
 
 

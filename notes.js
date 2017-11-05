@@ -57,6 +57,24 @@ $( document ).ready(function() {
     });
 
 
+    $( '#styleswitcher select' ).on( 'change', function() {
+
+        var linkTag = $('link')[0];
+        var currentStylesheet = linkTag.href.replace(/^.*[\\\/]/, '');
+        var newStylesheet = $(this).val() + '.css';
+
+
+        linkTag.href = linkTag.href.replace(currentStylesheet, newStylesheet);
+
+
+
+
+
+    });
+
+
+
+
 
 
 
@@ -185,3 +203,5 @@ function showNoteView(id){
     $( "#note_"+id+ " span" ).show();
 
 };
+
+
