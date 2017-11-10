@@ -41,14 +41,14 @@ $( document ).ready(function() {
 
     });
 
-    $( '.finishedcheck' ).on( 'click', function() {
-
+    $( '.finished input' ).on( 'click', function() {
 
         var id = $( this ).data('id');
 
 
 
-            finishNote(id);
+            saveNote(id);
+            setFinishedDate(id)
 
 
 
@@ -93,6 +93,7 @@ function showNotesInit() {
     savedNotes = JSON.parse(savedNotes);
 
 
+
     // Grab the template script
     var theTemplateScript = $("#notes-template").html();
 
@@ -118,6 +119,8 @@ function showNotesInit() {
 
 function saveNote(id){
 
+
+
     for (var i = 0; i < savedNotes.length; i++) {
         if(id == savedNotes[i].id){
             getNoteDataInput(savedNotes[i],i);
@@ -127,48 +130,38 @@ function saveNote(id){
 
     sessionStorage.setItem('notes', JSON.stringify(savedNotes));
 
-
 };
 
-function finishNote(id){
 
-    for (var i = 0; i < savedNotes.length; i++) {
-        if(id == savedNotes[i].id){
-            getNoteDataInputFinished(savedNotes[i],i);
-            break;
-        }
-    }
-
-    sessionStorage.setItem('notes', JSON.stringify(savedNotes));
-
-
-};
 
 
 function getNoteDataInput (Note, id) {
     Note.id =id;
-    Note.title = $("#note_"+id+" .titel input").val();
+
     Note.description = $("#note_"+id+ " .description textarea").val();
-    Note.untildate = $("#note_"+id+" .untildate input").val();
+
+    if ($("#note_"+id).hasClass('edit')) {
+        Note.title = $("#note_"+id+" .title input").val();
+        Note.untildate = $("#note_"+id+" .untildate input").val();
+
+    } else {
+        Note.title = $("#note_"+id+" .title span").html();
+        Note.untildate = $("#note_"+id+" .untildate span").html();
+
+    }
 
 
-    if ($("#note_"+id+" .finishedcheck").is(":checked")) {
+
+    if ($("#note_"+id+" .finished input").is(":checked")) {
         Note.finished = true;
+        Note.finisheddate = getCurrentDate();
     } else {
         Note.finished = false;
+        delete Note.finisheddate;
     }
 
 }
 
-function getNoteDataInputFinished (Note, id) {
-
-    if ($("#note_"+id+" .finishedcheck").is(":checked")) {
-        Note.finished = true;
-    } else {
-        Note.finished = false;
-    }
-
-}
 
 
 
@@ -178,8 +171,8 @@ function editNoteView(id){
     var untildate = $("#note_"+id+ " .untildate span").html();
     $( "#note_"+id+ " .untildate input.onlyedit" ).val(untildate);
 
-    var titel = $("#note_"+id+ " .titel span").html();
-    $( "#note_"+id+ " .titel input.onlyedit" ).val(titel);
+    var title = $("#note_"+id+ " .title span").html();
+    $( "#note_"+id+ " .title input.onlyedit" ).val(title);
 
     $( "#note_"+id+ " .description textarea" ).attr('readonly', false);
 
@@ -194,8 +187,8 @@ function showNoteView(id){
     var untildate = $("#note_"+id+ " .untildate input").val();
     $( "#note_"+id+ " .untildate span" ).html(untildate);
 
-    var titel = $("#note_"+id+ " .titel input").val();
-    $("#note_"+id+ " .titel span" ).html(titel);
+    var title = $("#note_"+id+ " .title input").val();
+    $("#note_"+id+ " .title span" ).html(title);
 
     $( "#note_"+id+ " .description textarea" ).attr('readonly', true);
 
@@ -204,4 +197,44 @@ function showNoteView(id){
 
 };
 
+
+function setFinishedDate(id){
+
+
+
+    var today = getCurrentDate();
+
+
+    if ($("#note_"+id+" .finished input").is(":checked")) {
+        $("#note_"+id+" .finished label").html('Finished (' + today + ')');
+    } else {
+        $("#note_"+id+" .finished label").html('Finished');
+    }
+
+};
+
+function getCurrentDate(){
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1;
+    var yyyy = today.getFullYear();
+
+    if(dd<10)
+    {
+        dd='0'+dd;
+    }
+
+    if(mm<10)
+    {
+        mm='0'+mm;
+    }
+
+
+    today = dd+'.'+mm+'.'+yyyy;
+
+    return(today);
+
+
+};
 

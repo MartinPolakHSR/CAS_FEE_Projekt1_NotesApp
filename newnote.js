@@ -23,6 +23,7 @@ function createNewNote(){
     newNote.description = $("#description").val();
     newNote.untildate = $("#untildate").val();
     newNote.finished = false;
+    newNote.created = getCurrentDate();
 
 
     if(sessionStorage.notes)

@@ -55,7 +55,7 @@
             <span>{{untildate}}</span>
         </div>
 
-        <div class="titel">
+        <div class="title">
             <input class="onlyedit" type="text">
             <span> {{title}}</span>
         </div>
@@ -70,9 +70,9 @@
             <span></span>
         </div>
 
-        <div id="finished">
-            <input id="finishedcheck" class="finishedcheck" data-id="{{id}}" type="checkbox" {{#if finished}}checked{{/if}} />
-            <label for="finishedcheck">Finished</label>
+        <div class="finished">
+            <input  data-id="{{id}}" type="checkbox" {{#if finished}}checked{{/if}} />
+            <label>Finished {{#if finished}}({{finisheddate}}){{/if}} </label>
         </div>
 
         <div class="description">

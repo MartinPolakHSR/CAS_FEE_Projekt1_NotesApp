@@ -23,7 +23,7 @@ div.note .untildate {
 
 }
 
-div.note .titel {
+div.note .title {
     grid-column-start: 3;
     grid-column-end: 5;
 
