@@ -17,8 +17,8 @@ app.use(bodyParser.json());
 // Add a router for notes
 app.use('/notes', notesRouter);
 
-const hostname = 'localhost';
 const port = 3000;
-app.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+
+app.listen(3000, function () {
+    console.log('Example app listening on port 3000!');
 });
