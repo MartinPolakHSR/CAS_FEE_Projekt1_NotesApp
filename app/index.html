@@ -8,12 +8,14 @@
     <meta name="description" content="HSR CAS-FEE">
     <meta name="author" content="Martin Polak">
 
-    <link rel="stylesheet" href="style1.css">
+    <link rel="stylesheet" href="css/style1.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
-    <script src="notes.js"></script>
 
+    <script src="js/notes.js"></script>
+    <script src="js/model.js"></script>
+    <script src="js/view.js"></script>
 
 </head>
 
@@ -21,7 +23,7 @@
 
 <div id="control">
     <div id="newNote">
-        <a  href="newnote.html" class="button">Create new Note</a>
+        <a href="newnote.html" class="button">Create new Note</a>
     </div>
     <div id="styleswitcher">
         <select  class="button">
@@ -62,7 +64,17 @@
 
 
         <div class="importance">
-            <div>Importance</div>
+            <label>Wichtigkeit &nbsp;</label>
+            <select>
+
+                <option value="1" {{#if (isEqual '1' importance)}} selected {{/if}}>1</option>
+                <option value="2" {{#if (isEqual '2' importance)}} selected {{/if}}>2</option>
+                <option value="3" {{#if (isEqual '3' importance)}} selected {{/if}}>3</option>
+                <option value="4" {{#if (isEqual '4' importance)}} selected {{/if}}>4</option>
+                <option value="5" {{#if (isEqual '5' importance)}} selected {{/if}}>5</option>
+
+
+            </select>
         </div>
 
         <div  class="editNote"  >
