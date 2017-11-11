@@ -16,9 +16,8 @@ class Note {
     }
 
 
-    /** Rückgabe als Objekte **/
 
-    getNote() {
+    getNoteObject() {
 
         let noteObject = {};
 
@@ -46,7 +45,7 @@ function addNoteToSessionStorage(Note) {
 
     let noteArray = getSavedNotes();
 
-    noteArray.push(Note.getNote());
+    noteArray.push(Note.getNoteObject());
     sessionStorage.notes = JSON.stringify(noteArray);
 
 }

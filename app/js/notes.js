@@ -116,7 +116,7 @@ function getNoteDataInput (id, mode) {
         editNoteData.finished = false;
     }
 
-    editNoteData.getNote();
+    editNoteData.getNoteObject();
     //console.log(editNoteData);
     saveNote(editNoteData,id);
 
