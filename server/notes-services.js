@@ -1,14 +1,7 @@
 const Datastore = require('nedb');
 const db = new Datastore({ filename: './server/data/notes.db', autoload: true});
 
-function Note(date) {
 
-    this.title = 'Set title';
-    this.creationDate = date;
-    this.finishedDate = null;
-    this.description = 'Set description';
-    this.importance = 0;
-}
 
 let notesController = {
 
@@ -39,6 +32,6 @@ let notesController = {
     deleteNote: function(id, callback) {
         db.remove({ _id: id }, {multi: false}, callback);
     }
-}
+};
 
 module.exports = notesController;

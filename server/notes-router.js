@@ -1,5 +1,5 @@
 const express = require('express');
-const notesController = require('./notes-controller');
+const notesController = require('./notes-services');
 const notesRouter = express.Router();
 
 // get a note by id
@@ -32,7 +32,6 @@ notesRouter.post('/', (req, res) => {
 // update an existing note
 notesRouter.put('/:id', (req, res) => {
   let id = req.params.id;
-  console.log(req.body);
   notesController.updateNote(id, req.body, (err, updatedNote) => {
     res.json(updatedNote);
   });
