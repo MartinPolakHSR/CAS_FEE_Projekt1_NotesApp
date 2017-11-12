@@ -3,7 +3,6 @@
 
 class Note {
 
-
     constructor(title, description, importance, untildate, created) {
         this.id = getLastID();
         this.title = title;
@@ -16,11 +15,9 @@ class Note {
     }
 
 
-
     getNoteObject() {
 
         let noteObject = {};
-
 
         noteObject.id = this.id;
         noteObject.title = this.title;
@@ -35,31 +32,32 @@ class Note {
     }
 }
 
-
-
-
-
-function addNoteToSessionStorage(Note) {
-
-    console.log(Note);
+function deleteNote(id){
 
     let noteArray = getSavedNotes();
+    for (var i = 0; i < noteArray.length; i++) {
+        if(id == noteArray[i].id){
+            noteArray.splice(i,1);
+            break;
+        }
+    }
+    sessionStorage.setItem('notes', JSON.stringify(noteArray));
+};
 
+function saveNewNote(Note) {
+
+    let noteArray = getSavedNotes();
     noteArray.push(Note.getNoteObject());
     sessionStorage.notes = JSON.stringify(noteArray);
-
 }
 
 function saveNote(Note,id){
 
-    //console.log(Note);
-
     let noteArray = getSavedNotes();
-
     for (var i = 0; i < noteArray.length; i++) {
         if(id == noteArray[i].id){
             noteArray[i] = Note;
-            noteArray.id = id;
+            noteArray[i].id = id;
             break;
         }
     }
@@ -67,7 +65,6 @@ function saveNote(Note,id){
     sessionStorage.setItem('notes', JSON.stringify(noteArray));
 
 };
-
 
 function getSavedNotes() {
 
@@ -77,44 +74,74 @@ function getSavedNotes() {
     }else{
         return [];
     }
+}
 
+function getSavedNote(id) {
+
+    if(sessionStorage.notes)
+    {
+        let noteArray = getSavedNotes();
+        for (var i = 0; i < noteArray.length; i++) {
+            if(id == noteArray[i].id){
+                return noteArray[i];
+                break;
+            }
+        }
+    }else{
+        return [];
+    }
+}
+
+function saveStyle(style) {
+    sessionStorage.style = style;
+}
+
+
+function loadStyle() {
+
+    if(sessionStorage.style)
+    {
+        return sessionStorage.getItem('style');
+    }else{
+        return 'redstyle.css';
+    }
 }
 
 
 
+function getCurrentDate(type){
 
-function getCurrentDate(){
+    let today = new Date();
+    let todayJS;
+    let todayEURO;
 
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth()+1;
-    var yyyy = today.getFullYear();
+    let dd = today.getDate();
+    let mm = today.getMonth()+1;
+    let yyyy = today.getFullYear();
 
-    if(dd<10)
-    {
+    if(dd<10) {
         dd='0'+dd;
     }
-
-    if(mm<10)
-    {
+    if(mm<10) {
         mm='0'+mm;
     }
+    todayEURO = dd+'.'+mm+'.'+yyyy;
+    todayJS = yyyy+'-'+mm+'-'+dd;
 
-
-    today = dd+'.'+mm+'.'+yyyy;
-
-    return(today);
-
-
+    if (type == 'js'){
+        return(todayJS);
+    } else {
+        return(todayEURO)
+    }
 };
+
+
 
 
 function getLastID(){
 
     let maxID = 0;
     let noteArray = getSavedNotes();
-
-
     if (noteArray.length > 0) {
 
         for (var i = 0; i < noteArray.length; i++) {
@@ -123,7 +150,6 @@ function getLastID(){
             }
             ;
         }
-
         return maxID + 1;
     } else {
         return 0;

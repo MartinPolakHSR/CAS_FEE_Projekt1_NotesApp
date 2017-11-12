@@ -1,4 +1,3 @@
-
 "use strict";
 
 // Controller für index.html
@@ -6,124 +5,126 @@
 
 $( document ).ready(function() {
 
-
     showNotes(getSavedNotes());
-    showNoteViewAll();
+    setShowViewAll();
+    showCurrentStyle(loadStyle());
 
 
     $( "#sortByFinishDate" ).on( "click", function() {
-        alert('ToDo SortByFinishData');
+        SortNotesByFinishUntilDate();
     });
 
     $( "#sortByCreatedDate" ).on( "click", function() {
-        alert('ToDo sortByCreatedDate')
+        SortNotesByCreatedDate();
     });
 
     $( "#sortByImportance" ).on( "click", function() {
-        alert('ToDo sortByImportance')
+        SortNotesByImportance();
     });
 
     $( "#sortByFinished" ).on( "click", function() {
-        alert('ToDo sortByFinished')
+        SortNotesByFinished();
     });
 
     $( 'a.editbutton' ).on( 'click', function() {
-
-
-        var id = $( this ).data('id');
+        let id = $( this ).data('id');
         $( 'div#note_'+id ).toggleClass('edit view');
         if   ($( 'div#note_'+id ).hasClass('view')) {
-
-
-            getNoteDataInput(id,'edit');
-            showNoteView(id);
-
+            $( 'div#note_'+id+ ' .deletebutton' ).removeClass('cancel');
+            setEditData(id,'edit');
+            setShowViewNote(id);
         } else {
-
-
-            editNoteView(id);
+            $( 'div#note_'+id+ ' .deletebutton' ).addClass('cancel');
+            seteEditViewNote(id);
         }
-
-
     });
 
+    $( 'a.deletebutton' ).on( 'click', function() {
+        if ($(this).hasClass('cancel')) {
+            $( 'div#note_'+$(this).data('id') ).toggleClass('edit view');
+            undoChanges($(this).data('id'));
+            setShowViewNote($(this).data('id'));
+
+        } else {
+            deleteNote($(this).data('id'));
+            showNotes(getSavedNotes());
+            setShowViewAll();
+
+        }
+    });
+
+
     $( '.finished input' ).on( 'click', function() {
-
-        var id = $( this ).data('id');
-
-
-            getNoteDataInput(id);
-            showFinishedDate(id)
-
-
-
+            setFinishdateData($( this ).data('id'));
+            showFinishedDate($( this ).data('id'))
     });
 
 
     $( '#styleswitcher select' ).on( 'change', function() {
-
-        var linkTag = $('link')[0];
-        var currentStylesheet = linkTag.href.replace(/^.*[\\\/]/, '');
-        var newStylesheet = $(this).val() + '.css';
-
-
-        linkTag.href = linkTag.href.replace(currentStylesheet, newStylesheet);
-
-
+       setStyle($(this).val() + '.css')
     });
 
 
-})
+});
 
 
 
 
 
-function getNoteDataInput (id, mode) {
+function setEditData (id, mode, ) {
 
-    let title;
-    let description;
-    let importance;
-    let untildate;
-    let finished;
-    let finisheddate;
-
-
-    description = $("#note_"+id+ " .description textarea").val();
-    importance = $("#note_"+id+ " .importance select").val();
-
-    // edit = wurde soeben bearbeitet
-    if (mode == 'edit') {
-
-        title = $("#note_"+id+" .title input").val();
-        untildate = $("#note_"+id+" .untildate input").val();
-
-    } else {
-        title = $("#note_"+id+" .title span").html();
-        untildate = $("#note_"+id+" .untildate span").html();
-
-    }
-
-    console.log(title);
+    let NoteData = getSavedNote(id);
+    let description = $("#note_"+id+ " .description textarea").val();
+    let importance = $("#note_"+id+ " .importance select").val();
+    let title = $("#note_"+id+" .title input").val();
+    let untildate = $("#note_"+id+" .untildate input").val();
 
 
     let editNoteData = new Note(title, description, importance, untildate);
 
     if ($("#note_"+id+" .finished input").is(":checked")) {
         editNoteData.finished = true;
-        editNoteData.finisheddate = getCurrentDate();
+        editNoteData.finisheddate = NoteData.finisheddate;
     } else {
         editNoteData.finished = false;
     }
 
     editNoteData.getNoteObject();
-    //console.log(editNoteData);
     saveNote(editNoteData,id);
 
 }
 
 
+function setFinishdateData (id ) {
 
+    let NoteData = getSavedNote(id);
+
+    console.log(id);
+    let title = NoteData.title;
+    let description = NoteData.description;
+    let importance = NoteData.importance;
+    let untildate = NoteData.untildate;
+
+
+    let editNoteData = new Note(title, description, importance, untildate);
+    editNoteData.getNoteObject();
+
+    if ($("#note_"+id+" .finished input").is(":checked")) {
+        editNoteData.finished = true;
+        editNoteData.finisheddate = getCurrentDate('euro');
+    } else {
+        editNoteData.finished = false;
+    }
+
+    saveNote(editNoteData,id);
+
+}
+
+
+function setStyle(style) {
+    saveStyle(style);
+    showCurrentStyle(style);
+}
 
 
 

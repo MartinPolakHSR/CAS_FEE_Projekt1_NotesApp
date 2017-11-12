@@ -8,7 +8,7 @@
     <meta name="description" content="HSR CAS-FEE">
     <meta name="author" content="Martin Polak">
 
-    <link rel="stylesheet" href="css/style1.css">
+    <link rel="stylesheet" href="css/redstyle.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
@@ -27,8 +27,8 @@
     </div>
     <div id="styleswitcher">
         <select  class="button">
-            <option value="style1">Style 1</option>
-            <option value="style2">Style 2</option>
+            <option value="redstyle">red Style</option>
+            <option value="greenstyle">green Style</option>
         </select>
     </div>
 
@@ -48,18 +48,19 @@
 
     {{#each this}}
 
-    <div id="note_{{id}}" class="note view" data-id="{{id}}">
+    <div id="note_{{id}}" class="note view {{#if finished}}finish{{/if}}" data-id="{{id}}" data-created="{{created}}">
 
 
 
         <div class="untildate">
             <input class="onlyedit" type="date">
-            <span>{{untildate}}</span>
+            <span class="viewformat untildate">{{untildate}}</span>
+            <span class="storeformat">{{untildate}}</span>
         </div>
 
         <div class="title">
             <input class="onlyedit" type="text">
-            <span> {{title}}</span>
+            <span>{{title}}</span>
         </div>
 
 
@@ -78,7 +79,8 @@
         </div>
 
         <div  class="editNote"  >
-            <a class="button editbutton" data-id="{{id}}"><span></span></a>
+            <a class="button editbutton minwidth" data-id="{{id}}"><span></span></a>
+            <a class="button deletebutton minwidth" data-id="{{id}}"><span></span></a>
             <span></span>
         </div>
 

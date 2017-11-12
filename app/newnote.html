@@ -9,7 +9,7 @@
     <meta name="author" content="Martin Polak">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="css/style1.css?v=1.0">
+    <link rel="stylesheet" href="css/redstyle.css?v=1.0">
 
 
 
@@ -17,41 +17,64 @@
 
 <body>
 
+<h1>Neue Notiz erstellen</h1>
 
+<div id="create_wrapper">
     <div>
         <label for="title">Title</label>
-        <input id="title" type="text">
-    </div>
-    <br>
-    <div>
-        <label for="description">Beschreibung</label>
-        <textarea id="description" rows="4" cols="50"></textarea>
-    </div>
-    <br>
-    <div>
-        <label for="importance">Wichtigkeit</label>
-       <select id="importance">
-           <option>1</option>
-           <option>2</option>
-           <option>3</option>
-           <option>4</option>
-           <option>5</option>
-       </select>
-    </div>
-    <br>
-    <div>
-        <label for="untildate">Erledigt bis</label>
-        <input type="date" id="untildate">
     </div>
 
-    <button id="createNewNote" type="button">Save</button>
-    <button id="cancel" type="button">Cancel</button>
+    <div>
+        <input id="title" type="text">
+    </div>
+
+
+    <div>
+        <label for="description">Beschreibung</label>
+    </div>
+
+    <div>
+        <textarea id="description" rows="4" cols="50"></textarea>
+    </div>
+
+
+    <div>
+        <label for="importance">Wichtigkeit</label>
+    </div>
+
+    <div>
+        <select id="importance">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+        </select>
+    </div>
+
+
+    <div>
+        <label for="untildate">Erledigt bis</label>
+    </div>
+
+    <div>
+        <input type="date" id="untildate" required>
+    </div>
+
+    <div>
+        <a class="button" id="createNewNote" type="button">Save</a>
+    </div>
+    <div>
+        <a class="button" button id="cancel" type="button">Cancel</a>
+    </div>
+</div>
 
 
 
 
     <script src="js/model.js"></script>
     <script src="js/newnote.js"></script>
+    <script src="js/view.js"></script>
 
 
 </body>

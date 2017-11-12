@@ -1,4 +1,7 @@
 
+body {
+    margin: 0px 20px;
+}
 
 div#control {
     display: grid;
@@ -15,6 +18,12 @@ div.note {
     grid-template-rows: 60px 60px;
     grid-row-gap: 5px;
     grid-column-gap: 5px;
+}
+
+div#create_wrapper {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-row-gap: 20px;
 }
 
 div.note .untildate {
@@ -57,12 +66,16 @@ div.note .editNote {
 
 
 .button {
-    border: 1px solid red;
+    border: 1px solid green;
     color: white;
-    background: red;
+    background: green;
     border-radius: 5px;
     padding: 6px;
     cursor: pointer;
+}
+
+.button.minwidth {
+    min-width: 50px;
 }
 
 #control div {
@@ -106,22 +119,40 @@ div.note div {
     align-items: center;
 }
 
-
-div.editNote {
+div.note div.editNote {
+    display: grid;
     position: relative;
 }
 
-a.button.editbutton {
+
+
+a.button.editbutton,
+a.button.deletebutton
+{
     position: absolute;
     right: 0;
+    text-align: center;
+
+}
+
+a.button.editbutton
+{
+    top: 20px;
+
+}
+
+a.button.deletebutton
+{
+    top: 60px;
 }
 
 div.note.edit {
-    border: 1px solid red;
+    border: 1px solid green;
+    padding: 5px;
 }
 
 div.edit a.button.editbutton {
-    background: red;
+    background: green;
 }
 
 
@@ -132,3 +163,24 @@ div.edit a.button.editbutton:after {
 div.view a.button.editbutton:after {
     content: "edit";
 }
+
+div.view a.button.deletebutton:after {
+    content: "delete";
+}
+div.edit a.button.deletebutton:after {
+    content: "cancel";
+}
+
+.title span {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+span.storeformat {
+    display: none !important;
+}
+
+div#buttons {
+    margin-top: 10px;
+}
+
