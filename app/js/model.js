@@ -1,10 +1,9 @@
 'use strict';
 
-
 class Note {
 
-    constructor(title, description, importance, untildate, created) {
-        this.id = getLastID();
+    constructor(id, title, description, importance, untildate) {
+        this.id = id;
         this.title = title;
         this.description = description;
         this.importance = importance;
@@ -32,65 +31,101 @@ class Note {
     }
 }
 
-function deleteNote(id){
+class dataModel {
 
-    let noteArray = getSavedNotes();
-    for (var i = 0; i < noteArray.length; i++) {
-        if(id == noteArray[i].id){
-            noteArray.splice(i,1);
-            break;
-        }
-    }
-    sessionStorage.setItem('notes', JSON.stringify(noteArray));
-};
-
-function saveNewNote(Note) {
-
-    let noteArray = getSavedNotes();
-    noteArray.push(Note.getNoteObject());
-    sessionStorage.notes = JSON.stringify(noteArray);
-}
-
-function saveNote(Note,id){
-
-    let noteArray = getSavedNotes();
-    for (var i = 0; i < noteArray.length; i++) {
-        if(id == noteArray[i].id){
-            noteArray[i] = Note;
-            noteArray[i].id = id;
-            break;
-        }
+    constructor() {
+        this.dataAccess = new dataAccess();
+        this.notes = [];
     }
 
-    sessionStorage.setItem('notes', JSON.stringify(noteArray));
-
-};
-
-function getSavedNotes() {
-
-    if(sessionStorage.notes)
-    {
-        return JSON.parse(sessionStorage.getItem('notes'));
-    }else{
-        return [];
+    getAllNotes() {
+        return this.dataAccess.getAllNotes()
+            .then(function(notes) {
+                this.notes = notes;
+                return notes;
+            }.bind(this))
     }
-}
 
-function getSavedNote(id) {
 
-    if(sessionStorage.notes)
-    {
-        let noteArray = getSavedNotes();
-        for (var i = 0; i < noteArray.length; i++) {
-            if(id == noteArray[i].id){
-                return noteArray[i];
-                break;
+    getNextId() {
+
+        let maxID = 0;
+        let noteArray = this.notes;
+        if (noteArray.length > 0) {
+
+            for (let i = 0; i < noteArray.length; i++) {
+                if ( parseInt(noteArray[i].id) > maxID) {
+                    maxID = noteArray[i].id;
+                }
             }
+            return parseInt(maxID) + 1;
+        } else {
+            return 0;
         }
-    }else{
-        return [];
+
     }
+
+    createNote(newNote) {
+        return this.dataAccess.createNote(newNote)
+            .then(function(note) {
+                this.notes.push(note);
+                return note;
+            }.bind(this));
+    }
+
+    deleteNote(id) {
+        return this.dataAccess.deleteNote(id)
+            .then(function(numRemoved) {
+                if (numRemoved === 1) {
+                    let newNotes = this.notes.filter((n) => {
+                        return n.id !== id;
+                    });
+                    this.notes = newNotes;
+                }
+            }.bind(this));
+    }
+
+    getNote(id) {
+        return this.dataAccess.getNote(id);
+    }
+
+    updateNoteContent(id, content) {
+
+        let note = {};
+
+        this.notes.forEach((n) => {
+            if (n.id === id) {
+                n.title = content.title;
+                n.description = content.description;
+                n.importance = content.importance;
+                n.untildate = content.untildate;
+                n.finished = content.finished;
+                n.finisheddate = content.finisheddate;
+                note = n;
+            }
+        });
+
+        return this.dataAccess.updateNote(note);
+    }
+
+    updateFinishedDate(id, content) {
+
+        let note = {};
+
+        this.notes.forEach((n) => {
+            if (n.id === id) {
+                n.finisheddat = content.finisheddate;
+                n.finished = content.finished;
+                note = n;
+            }
+        });
+
+        return this.dataAccess.updateNote(note);
+    }
+
 }
+
+
 
 function saveStyle(style) {
     sessionStorage.style = style;
@@ -106,7 +141,6 @@ function loadStyle() {
         return 'redstyle.css';
     }
 }
-
 
 
 function getCurrentDate(type){
@@ -128,30 +162,12 @@ function getCurrentDate(type){
     todayEURO = dd+'.'+mm+'.'+yyyy;
     todayJS = yyyy+'-'+mm+'-'+dd;
 
-    if (type == 'js'){
+    if (type === 'js'){
         return(todayJS);
     } else {
         return(todayEURO)
     }
-};
+}
 
 
 
-
-function getLastID(){
-
-    let maxID = 0;
-    let noteArray = getSavedNotes();
-    if (noteArray.length > 0) {
-
-        for (var i = 0; i < noteArray.length; i++) {
-            if (noteArray[i].id > maxID) {
-                maxID = noteArray[i].id;
-            }
-            ;
-        }
-        return maxID + 1;
-    } else {
-        return 0;
-    }
-};

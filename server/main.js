@@ -17,7 +17,11 @@ app.use(bodyParser.json());
 // Add a router for notes
 app.use('/notes', notesRouter);
 
-const port = 3000;
+app.get('/favicon.ico', function(req, res) {
+    res.status(204);
+});
+
+
 
 app.listen(3000, function () {
     console.log('Note App listening on port 3000!');

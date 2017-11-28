@@ -1,19 +1,17 @@
 'use strict';
 
+// view functions for index.html
+function setShowViewAll(noteArray){
 
-// view funktionen
 
-function setShowViewAll(){
-
-    let noteArray = getSavedNotes();
     for (let i = 0; i < noteArray.length; i++) {
         diableElements(noteArray[i].id);
-        formatUntildateFromNote(noteArray[i].id)
+        formatUntildateFromNote(noteArray[i])
     }
 
 }
 
-function seteEditViewNote(id){
+function setEditViewNote(id){
 
     let untildate = $("#note_"+id+ " .untildate span.storeformat").html();
     $( "#note_"+id+ " .untildate input.onlyedit" ).val(untildate);
@@ -28,9 +26,9 @@ function seteEditViewNote(id){
 
 }
 
-function undoChanges(id){
+function undoChanges(oldNote){
 
-    let oldNote = getSavedNote(id);
+   let id = oldNote.id;
 
     let untildate = $("#note_"+id+ " .untildate span.storeformat").html();
     $( "#note_"+id+ " .untildate input.onlyedit" ).val(untildate);
@@ -47,6 +45,7 @@ function undoChanges(id){
 }
 
 function setShowViewNote(id){
+
 
     let untildate = $("#note_"+id+ " .untildate input").val();
     untildate = formatUntildate(untildate);
@@ -114,16 +113,19 @@ function showNotes(savedNotes){
 function SortNotesByFinishUntilDate(){
 
     $('.content-placeholder .note').show().sort(sortFinshDate).appendTo('.content-placeholder');
+    $('.content-placeholder .note.deleted').hide();
 }
 
 function SortNotesByCreatedDate(){
 
     $('.content-placeholder .note').show().sort(sortCreatedDateASC).appendTo('.content-placeholder');
+    $('.content-placeholder .note.deleted').hide();
 }
 
 function SortNotesByImportance(){
 
     $('.content-placeholder .note').show().sort(sortImportanceDESC).appendTo('.content-placeholder');
+    $('.content-placeholder .note.deleted').hide();
 }
 
 
@@ -132,21 +134,16 @@ function SortNotesByFinished(){
     $('.content-placeholder .note:not(.finish)').hide();
 }
 
+function hideFinished(){
 
-function formatUntildateFromNote (id){
+    $('.content-placeholder .note.deleted').hide();
+}
 
-    let noteArray = getSavedNotes();
-    let untildate;
+function formatUntildateFromNote (noteArray){
 
-    for (let i = 0; i < noteArray.length; i++) {
-        if (id === noteArray[i].id) {
-            untildate = formatUntildate(noteArray[i].untildate);
-            break;
-        }
-
-    }
-
-     $( "#note_"+id+ " .untildate span.viewformat" ).html(untildate);
+    let id = noteArray.id;
+    let untildate = formatUntildate(noteArray.untildate);
+    $( "#note_"+id+ " .untildate span.viewformat" ).html(untildate);
 }
 
 function formatUntildate (untildate){
