@@ -32,7 +32,7 @@ Browser öffnen URL http://localhost:3000
 
 
 ## Allgemeine Code Guidelines
-  - Unterst?tzung modernen Browsers & Features (?ltere Browser k?nnen vernachl?ssigt werden)
+  - Unterst?tzung modernen Browsers & Features (ältere Browser können vernachlässigt werden)
     - CSS3+, HTML5+, ES6+
   - Saubere Trennung von Struktur (HTML/HBS), Logik (JS) und Darstellung (CSS)
   - Sauberen Code
