@@ -1,8 +1,4 @@
-{"id":"0","title":"Test88","created":"18.11.2017","untildate":"2017-11-21","finished":false,"finisheddate":"","description":"test1","importance":"4","_id":"3HaGTgBAD4Mtjtjd"}
-{"id":"3","title":"TestABC","created":"18.11.2017","untildate":"2017-11-08","finished":false,"finisheddate":"","description":"ganz wichtig","importance":"5","_id":"klsbjShG8dUkehn6"}
-{"id":"2","title":"unwichtiger","created":"18.11.2017","untildate":"2017-09-07","finished":true,"finisheddate":"18.11.2017","description":"unwichtig","importance":"1","_id":"pVzeW2gzkz5kREja"}
-{"id":"0","title":"Test88","created":"18.11.2017","untildate":"2017-11-21","finished":true,"finisheddate":"18.11.2017","description":"test1","importance":"4","_id":"3HaGTgBAD4Mtjtjd"}
-{"id":"0","title":"Test88","created":"18.11.2017","untildate":"2017-11-21","finished":false,"finisheddate":"","description":"test1","importance":"4","_id":"3HaGTgBAD4Mtjtjd"}
-{"id":"2","title":"unwichtiger","created":"18.11.2017","untildate":"2017-09-07","finished":false,"finisheddate":"","description":"unwichtig","importance":"1","_id":"pVzeW2gzkz5kREja"}
-{"id":"0","title":"Test88","created":"18.11.2017","untildate":"2017-11-21","finished":true,"finisheddate":"19.11.2017","description":"test1","importance":"4","_id":"3HaGTgBAD4Mtjtjd"}
 {"id":"0","title":"Test88","created":"18.11.2017","untildate":"2017-11-21","finished":true,"finisheddate":"19.11.2017","description":"test1","importance":"3","_id":"3HaGTgBAD4Mtjtjd"}
+{"id":"3","title":"TestABC","created":"18.11.2017","untildate":"2017-11-08","finished":false,"finisheddate":"","description":"ganz wichtig","importance":"5","_id":"klsbjShG8dUkehn6"}
+{"id":"2","title":"unwichtiger","created":"18.11.2017","untildate":"2017-09-07","finished":false,"finisheddate":"","description":"unwichtig","importance":"1","_id":"pVzeW2gzkz5kREja"}
+{"id":"4","title":"neuer Eintrag","description":"test","importance":"3","untildate":"2017-11-08","finished":"","finisheddate":"","created":"28.11.2017","_id":"P3nVua0BDsYygUjg"}

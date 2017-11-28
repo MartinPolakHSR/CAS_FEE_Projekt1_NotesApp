@@ -108,21 +108,6 @@ class dataModel {
         return this.dataAccess.updateNote(note);
     }
 
-    updateFinishedDate(id, content) {
-
-        let note = {};
-
-        this.notes.forEach((n) => {
-            if (n.id === id) {
-                n.finisheddat = content.finisheddate;
-                n.finished = content.finished;
-                note = n;
-            }
-        });
-
-        return this.dataAccess.updateNote(note);
-    }
-
 }
 
 
